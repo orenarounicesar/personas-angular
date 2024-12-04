@@ -1,5 +1,4 @@
 {
-    "apiUrlCrear": "http://localhost:3000/api/backend-nodejs/personas",
-    "apiUrlEliminar": "http://localhost:3000/api/backend-nodejs/personas"
-  }
-  
+    "apiUrlCrear": "",
+    "apiUrlEliminar": ""
+}
