@@ -27,6 +27,9 @@ Estas variables reemplazarán los valores predeterminados en el archivo `environ
 
 ## Pasos para construir y ejecutar el contenedor
 
+> [!IMPORTANT]
+> Reemplazar en el siguiente comando las variables `API_URL_CREAR` y `API_URL_ELIMINAR` por los backend.
+
 ```bash
 # Clona el repositorio en tu máquina local
 git clone https://github.com/orenarounicesar/personas-angular.git
@@ -36,10 +39,16 @@ cd personas-angular
 docker build \
   --build-arg API_URL_CREAR=https://api.example.com/crear \
   --build-arg API_URL_ELIMINAR=https://api.example.com/eliminar \
-  -t angular-distribuido .
+  -t personas-angular .
 
 # Ejecuta el contenedor creado
-docker run -p 3000:3000 angular-distribuido
+docker run -p 4200:3000 personas-angular
 
 # Accede a la aplicación en tu navegador web
-# http://localhost:3000
+# http://localhost:4200
+```
+## Acceder a registrar y eliminar
+
+- `http://localhost:4200/crear`: URL para la creación.
+- `http://localhost:4200/eliminar`: URL para la eliminación.
+
