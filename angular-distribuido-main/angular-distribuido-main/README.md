@@ -1,27 +1,45 @@
-# AngularDistribuido
+# Proyecto Angular Distribuido con Docker
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.14.
+Este proyecto utiliza un contenedor Docker para construir y servir una aplicación Angular. La configuración permite personalizar las variables de entorno relacionadas con las URLs de las APIs durante la construcción.
 
-## Development server
+## Requisitos previos
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Antes de comenzar, asegúrate de tener instalados los siguientes programas:
 
-## Code scaffolding
+- [Docker](https://www.docker.com/get-started) (versión 20.10 o superior)
+- [Node.js](https://nodejs.org/) (opcional, solo si deseas realizar pruebas locales antes de crear el contenedor)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Estructura del Dockerfile
 
-## Build
+El `Dockerfile` consta de dos etapas:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+1. **Compilación de la aplicación Angular**: Se utiliza Node.js para instalar dependencias, reemplazar variables de entorno y compilar la aplicación para producción.
+2. **Servir la aplicación**: Se usa `serve` para servir los archivos estáticos generados.
 
-## Running unit tests
+## Configuración de variables de entorno
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Durante el proceso de construcción, puedes proporcionar valores personalizados para las siguientes variables:
 
-## Running end-to-end tests
+- `API_URL_CREAR`: URL de la API para la creación.
+- `API_URL_ELIMINAR`: URL de la API para la eliminación.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Estas variables reemplazarán los valores predeterminados en el archivo `environments.ts` del proyecto Angular.
 
-## Further help
+## Pasos para construir y ejecutar el contenedor
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```bash
+# Clona el repositorio en tu máquina local
+git clone <URL_DEL_REPOSITORIO>
+cd <NOMBRE_DEL_PROYECTO>
+
+# Construye la imagen Docker, proporcionando los valores para las variables de entorno
+docker build \
+  --build-arg API_URL_CREAR=https://api.example.com/crear \
+  --build-arg API_URL_ELIMINAR=https://api.example.com/eliminar \
+  -t angular-distribuido .
+
+# Ejecuta el contenedor creado
+docker run -p 3000:3000 angular-distribuido
+
+# Accede a la aplicación en tu navegador web
+# http://localhost:3000
