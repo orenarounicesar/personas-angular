@@ -12,6 +12,14 @@ RUN npm install
 # Copia el resto del código fuente al contenedor
 COPY . .
 
+# Reemplaza las variables de entorno en el archivo environment.ts
+# Usa argumentos de construcción para proporcionar las URLs
+ARG API_URL_CREAR
+ARG API_URL_ELIMINAR
+
+RUN sed -i "s|apiUrlCrear: '.*'|apiUrlCrear: '${API_URL_CREAR}'|" ./src/enviroments/environments.ts && \
+    sed -i "s|apiUrlEliminar: '.*'|apiUrlEliminar: '${API_URL_ELIMINAR}'|" ./src/enviroments/environments.ts
+
 # Construye la aplicación Angular para producción
 RUN npm run build -- --configuration production
 
