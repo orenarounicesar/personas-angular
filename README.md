@@ -29,8 +29,8 @@ Estas variables reemplazarán los valores predeterminados en el archivo `environ
 
 ```bash
 # Clona el repositorio en tu máquina local
-git clone <URL_DEL_REPOSITORIO>
-cd <NOMBRE_DEL_PROYECTO>
+git clone https://github.com/orenarounicesar/personas-angular.git
+cd personas-angular
 
 # Construye la imagen Docker, proporcionando los valores para las variables de entorno
 docker build \
